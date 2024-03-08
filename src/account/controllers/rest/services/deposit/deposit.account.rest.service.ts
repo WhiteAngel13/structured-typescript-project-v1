@@ -1,4 +1,4 @@
-import { AccountService } from '../../services/account/account.service';
+import { AccountService } from '../../../../services/account/account.service';
 import { DepositAccountRestServiceParamsDTO } from './deposit.account.rest.service.dtos';
 import { DepositAccountRestServiceResponseDTO } from './deposit.account.rest.service.dtos';
 

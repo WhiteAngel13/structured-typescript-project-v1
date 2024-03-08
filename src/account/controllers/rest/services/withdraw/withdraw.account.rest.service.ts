@@ -1,4 +1,4 @@
-import { AccountService } from '../../services/account/account.service';
+import { AccountService } from '../../../../services/account/account.service';
 import {
   WithdrawAccountRestServiceParamsDTO,
   WithdrawAccountRestServiceResponseDTO,

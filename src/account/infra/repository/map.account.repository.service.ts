@@ -1,5 +1,5 @@
-import { Account } from '../domain/entity/account.entity';
-import { AccountRepository } from '../domain/repository/account.repository';
+import { Account } from '../../domain/entity/account.entity';
+import { AccountRepository } from '../../domain/repository/account.repository';
 
 const map = new Map<string, Account>();
 
