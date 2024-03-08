@@ -31,6 +31,18 @@ app.get("/bank/:operation", async (request, response) => {
         }
       }
       break;
+
+    case "withdraw":
+      try {
+        const { account } = await accountRestController.withdraw(request.query);
+
+        response.end(JSON.stringify(account));
+      } catch (e) {
+        if (e instanceof Error) {
+          response.end(e.message);
+        }
+      }
+      break;
   }
   
 });
