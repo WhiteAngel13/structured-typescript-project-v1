@@ -1,8 +1,6 @@
-import { MapAccountRepositoryService } from "../../infra-repository/map.account.repository.service";
 import { AccountService } from "../../services/account/account.service";
 import { DepositAccountRestServiceParamsDTO } from "./deposit.account.rest.service.dtos";
 import { DepositAccountRestServiceResponseDTO } from "./deposit.account.rest.service.dtos";
-import { AccountRepository } from "../../domain/repository/account.repository";
 
 type Params = DepositAccountRestServiceParamsDTO;
 type Response = DepositAccountRestServiceResponseDTO;

@@ -7,11 +7,11 @@ app.get("/bank/:operation", async (request, response) => {
 
   const { operation } = request.params;
 
-  switch(operation) {
+  switch (operation) {
     case "create-account":
       try {
         const { account } = await accountRestController.create(request.query);
-    
+
         response.end(JSON.stringify(account));
       } catch (e) {
         if (e instanceof Error) {
@@ -44,7 +44,7 @@ app.get("/bank/:operation", async (request, response) => {
       }
       break;
   }
-  
+
 });
 
 app.listen(3000, () => {
