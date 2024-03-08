@@ -1,4 +1,4 @@
-import { AccountData } from '../../domain/entity/account.entity.data';
+import { AccountData } from '../../../../domain/entity/account.entity.data';
 
 export type DepositAccountRestServiceParamsDTO = {
   nickname: string;

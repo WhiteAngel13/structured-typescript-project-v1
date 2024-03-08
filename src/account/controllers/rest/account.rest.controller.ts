@@ -1,9 +1,9 @@
-import { CreateAccountRestService } from './services-create/create.account.rest.service';
-import { CreateAccountRestServiceResponseDTO } from './services-create/create.account.rest.service.dtos';
-import { DepositAccountRestService } from './services-deposit/deposit.account.rest.service';
-import { DepositAccountRestServiceResponseDTO } from './services-deposit/deposit.account.rest.service.dtos';
-import { WithdrawAccountRestService } from './services-withdraw/withdraw.account.rest.service';
-import { WithdrawAccountRestServiceResponseDTO } from './services-withdraw/withdraw.account.rest.service.dtos';
+import { CreateAccountRestService } from './services/create/create.account.rest.service';
+import { CreateAccountRestServiceResponseDTO } from './services/create/create.account.rest.service.dtos';
+import { DepositAccountRestService } from './services/deposit/deposit.account.rest.service';
+import { DepositAccountRestServiceResponseDTO } from './services/deposit/deposit.account.rest.service.dtos';
+import { WithdrawAccountRestService } from './services/withdraw/withdraw.account.rest.service';
+import { WithdrawAccountRestServiceResponseDTO } from './services/withdraw/withdraw.account.rest.service.dtos';
 
 export class AccountRestController {
   constructor(
