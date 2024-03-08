@@ -42,6 +42,9 @@ app.get('/bank/:operation', async (request, response) => {
         }
       }
       break;
+    default:
+      response.end('Invalid operation');
+      break;
   }
 });
 
