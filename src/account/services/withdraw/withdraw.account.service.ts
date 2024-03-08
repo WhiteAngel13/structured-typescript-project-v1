@@ -1,14 +1,14 @@
-import { Account } from "../../domain/entity/account.entity";
+import { Account } from '../../domain/entity/account.entity';
 
 export type WithdrawAccountServiceParamsDataDTO = {
-    nickname: string;
-    withdrawValue: number;
-}
+  nickname: string;
+  withdrawValue: number;
+};
 
 export type WithdrawAccountServiceParamsDTO = {
-    data: WithdrawAccountServiceParamsDataDTO;
-}
+  data: WithdrawAccountServiceParamsDataDTO;
+};
 
 export type WithdrawAccountServiceResponseDTO = {
-    account: Account;
-}
+  account: Account;
+};

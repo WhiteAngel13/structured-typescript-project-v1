@@ -1,5 +1,5 @@
 export type AccountData = {
-    id: string;
-    nickname: string;
-    balance: number;
-  };
+  id: string;
+  nickname: string;
+  balance: number;
+};

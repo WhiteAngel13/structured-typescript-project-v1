@@ -1,4 +1,4 @@
-import { AccountData } from "./account.entity.data";
+import { AccountData } from './account.entity.data';
 
 export class Account {
   constructor(private data: AccountData) {}
@@ -15,9 +15,9 @@ export class Account {
     return this.data.balance;
   }
 
-  updateBalance (value:number) {
+  updateBalance(value: number) {
     this.data.balance = value;
-}
+  }
 
   toJSON(): AccountData {
     return this.data;

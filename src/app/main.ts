@@ -1,14 +1,13 @@
-import express from "express";
-import { accountRestController } from "../account/account.module";
+import express from 'express';
+import { accountRestController } from '../account/account.module';
 
 const app = express();
 
-app.get("/bank/:operation", async (request, response) => {
-
+app.get('/bank/:operation', async (request, response) => {
   const { operation } = request.params;
 
   switch (operation) {
-    case "create-account":
+    case 'create-account':
       try {
         const { account } = await accountRestController.create(request.query);
 
@@ -20,7 +19,7 @@ app.get("/bank/:operation", async (request, response) => {
       }
       break;
 
-    case "deposit":
+    case 'deposit':
       try {
         const { account } = await accountRestController.deposit(request.query);
 
@@ -32,7 +31,7 @@ app.get("/bank/:operation", async (request, response) => {
       }
       break;
 
-    case "withdraw":
+    case 'withdraw':
       try {
         const { account } = await accountRestController.withdraw(request.query);
 
@@ -44,9 +43,8 @@ app.get("/bank/:operation", async (request, response) => {
       }
       break;
   }
-
 });
 
 app.listen(3000, () => {
-  console.log("Server is running on port 3000.");
+  console.log('Server is running on port 3000.');
 });

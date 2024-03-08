@@ -1,10 +1,10 @@
-import { AccountData } from "../../domain/entity/account.entity.data";
+import { AccountData } from '../../domain/entity/account.entity.data';
 
 export type WithdrawAccountRestServiceParamsDTO = {
-    nickname: string;
-    withdrawValue: string;
-}
+  nickname: string;
+  withdrawValue: string;
+};
 
 export type WithdrawAccountRestServiceResponseDTO = {
-    account: AccountData;
-}
+  account: AccountData;
+};
