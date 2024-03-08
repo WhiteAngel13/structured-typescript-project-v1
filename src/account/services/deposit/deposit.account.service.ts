@@ -10,6 +10,8 @@ export class DepositAccountService {
   constructor(private accountRepository: AccountRepository) {}
 
   async execute(params: Params): Promise<Response> {
+    if (params.data.value <= 0) throw new Error('invalid value');
+
     const account = await this.accountRepository.getByNickname(
       params.data.nickname,
     );
@@ -17,7 +19,7 @@ export class DepositAccountService {
     if (!account) throw new Error('Account with nickname does not exists');
 
     const accountId = account.id;
-    const updatedBalance = account.balance + params.data.depositValue;
+    const updatedBalance = account.balance + params.data.value;
 
     const updatedAccount = new Account({
       id: accountId,
