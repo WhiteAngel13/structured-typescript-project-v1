@@ -2,7 +2,7 @@ import { Account } from '../../domain/entity/account.entity';
 
 export type DepositAccountServiceParamsDataDTO = {
   nickname: string;
-  depositValue: number;
+  value: number;
 };
 
 export type DepositAccountServiceParamsDTO = {

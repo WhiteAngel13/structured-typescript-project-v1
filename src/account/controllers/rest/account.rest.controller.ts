@@ -29,10 +29,15 @@ export class AccountRestController {
     if (Array.isArray(params)) throw new Error('invalid params');
     const { nickname } = params as { nickname?: unknown };
     if (typeof nickname !== 'string') throw new Error('invalid nickname');
-    const { depositValue } = params as { depositValue?: unknown };
-    if (typeof depositValue !== 'string') throw new Error('invalid value');
+    const { value } = params as { value?: unknown };
+    if (typeof value !== 'string') throw new Error('invalid value');
+    const valueNumber = Number(value);
+    if (isNaN(valueNumber)) throw new Error('invalid value');
 
-    return this.depositAccountRestService.execute({ nickname, depositValue });
+    return this.depositAccountRestService.execute({
+      nickname,
+      value: valueNumber,
+    });
   }
 
   async withdraw(
