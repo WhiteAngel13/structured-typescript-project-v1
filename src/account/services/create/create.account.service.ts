@@ -11,8 +11,9 @@ export class CreateAccountService {
   constructor(private accountRepository: AccountRepository) {}
 
   async execute(params: Params): Promise<Response> {
-    const accountWithNicknameExists =
-      await this.accountRepository.getByNickname(params.data.nickname);
+    const accountWithNicknameExists = await this.accountRepository.findUnique({
+      where: { nickname: params.data.nickname },
+    });
 
     if (accountWithNicknameExists)
       throw new Error('Account with nickname already exists'); // A string passada para new Error fica armazenada dentro do objeto erro, com chave 'message'
