@@ -9,12 +9,17 @@ export class DepositAccountRestService {
   constructor(private readonly accountService: AccountService) {}
 
   async execute(params: Params): Promise<Response> {
-    const account = this.accountService.deposit({
-      data: {
-        nickname: params.nickname,
-        value: params.value,
-      },
+    const { account: accountExists } = await this.accountService.get({
+      by: { nickname: params.nickname },
     });
+
+    if (!accountExists) throw new Error('account not found');
+
+    const account = this.accountService.deposit({
+      toAccount: accountExists,
+      data: { value: params.value },
+    });
+
     return account;
   }
 }

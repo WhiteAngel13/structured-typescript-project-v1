@@ -36,20 +36,38 @@ const saveJsonFile = async (json: JsonFile): Promise<void> => {
   }
 };
 
-export class LocalFileAccountRepositoryService implements AccountRepository {
+export class AccountRepositoryService implements AccountRepository {
   async create(account: Account): Promise<void> {
     const loadedJson = await loadJsonFile();
     loadedJson[account.id] = account.toJSON();
     await saveJsonFile(loadedJson);
   }
 
-  async getById(id: string): Promise<Account | undefined> {
+  async findUnique(
+    params: AccountRepository.FindUnique.Params,
+  ): Promise<AccountRepository.FindUnique.Response> {
+    if (params.where.id) {
+      const accountById = await this.getById(params.where.id);
+
+      return { account: accountById };
+    }
+
+    if (params.where.nickname) {
+      const accountByNickname = await this.getByNickname(params.where.nickname);
+
+      return { account: accountByNickname };
+    }
+
+    return { account: undefined };
+  }
+
+  private async getById(id: string): Promise<Account | undefined> {
     const loadedJson = await loadJsonFile();
     const accountData = loadedJson[id];
     return accountData ? new Account(accountData) : undefined;
   }
 
-  async getByNickname(nickname: string): Promise<Account | undefined> {
+  private async getByNickname(nickname: string): Promise<Account | undefined> {
     const loadedJson = await loadJsonFile();
     const accounts = Object.values(loadedJson);
 

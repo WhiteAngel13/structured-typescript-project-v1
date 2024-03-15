@@ -12,9 +12,9 @@ export class WithdrawAccountService {
   constructor(private accountRepository: AccountRepository) {}
 
   async execute(params: Params): Promise<Response> {
-    const account = await this.accountRepository.getByNickname(
-      params.data.nickname,
-    );
+    const { account } = await this.accountRepository.findUnique({
+      where: { nickname: params.data.nickname },
+    });
 
     if (!account) throw new Error('Account with nickname does not exists');
 
