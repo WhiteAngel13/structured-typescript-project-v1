@@ -19,6 +19,10 @@ export class Account {
     this.data.balance = value;
   }
 
+  addBalance(value: number) {
+    this.data.balance += value;
+  }
+
   toJSON(): AccountData {
     return this.data;
   }

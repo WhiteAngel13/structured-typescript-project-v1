@@ -1,4 +1,3 @@
-import { Account } from '../../domain/entity/account.entity';
 import { AccountRepository } from '../../domain/repository/account.repository';
 import { DepositAccountServiceParamsDTO } from './deposit.account.service.dtos';
 import { DepositAccountServiceResponseDTO } from './deposit.account.service.dtos';
@@ -12,23 +11,11 @@ export class DepositAccountService {
   async execute(params: Params): Promise<Response> {
     if (params.data.value <= 0) throw new Error('invalid value');
 
-    const account = await this.accountRepository.getByNickname(
-      params.data.nickname,
-    );
+    const account = params.toAccount;
+    account.addBalance(params.data.value);
 
-    if (!account) throw new Error('Account with nickname does not exists');
+    await this.accountRepository.updateBalance(account); // Aqui eu atualizo uma conta que já existe criando uma com o mesmo ID, deve ter um jeito melhor de fazer isso
 
-    const accountId = account.id;
-    const updatedBalance = account.balance + params.data.value;
-
-    const updatedAccount = new Account({
-      id: accountId,
-      balance: updatedBalance,
-      nickname: params.data.nickname,
-    });
-
-    await this.accountRepository.updateBalance(updatedAccount); // Aqui eu atualizo uma conta que já existe criando uma com o mesmo ID, deve ter um jeito melhor de fazer isso
-
-    return { account: updatedAccount };
+    return { account };
   }
 }
