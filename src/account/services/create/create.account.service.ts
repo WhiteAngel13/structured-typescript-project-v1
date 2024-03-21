@@ -15,9 +15,8 @@ export class CreateAccountService {
       where: { nickname: params.data.nickname },
     });
 
-    if (accountWithNicknameExists)
-      throw new Error('Account with nickname already exists'); // A string passada para new Error fica armazenada dentro do objeto erro, com chave 'message'
-
+    if (accountWithNicknameExists.account)
+      throw new Error('Account with nickname already exists');
     const accountId = randomUUID();
 
     const account = new Account({

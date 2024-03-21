@@ -14,8 +14,13 @@ import {
 import {
   WithdrawAccountServiceParamsDTO,
   WithdrawAccountServiceResponseDTO,
-} from '../withdraw/withdraw.account.service';
-import { WithdrawAccountService } from '../withdraw/withdraw.account.service.dtos';
+} from '../withdraw/withdraw.account.service.dtos';
+import { WithdrawAccountService } from '../withdraw/withdraw.account.service';
+import { BalanceAccountService } from '../balance/balance.account.service';
+import {
+  BalanceAccountServiceParamsDTO,
+  BalanceAccountServiceResponseDTO,
+} from '../balance/balance.account.service.dtos';
 
 export class AccountService {
   constructor(
@@ -23,6 +28,7 @@ export class AccountService {
     private readonly createAccountService: CreateAccountService,
     private readonly depositAccountService: DepositAccountService,
     private readonly withdrawAccountSerive: WithdrawAccountService,
+    private readonly balanceAccountService: BalanceAccountService,
   ) {}
 
   async get(
@@ -47,5 +53,11 @@ export class AccountService {
     params: WithdrawAccountServiceParamsDTO,
   ): Promise<WithdrawAccountServiceResponseDTO> {
     return this.withdrawAccountSerive.execute(params);
+  }
+
+  async balance(
+    params: BalanceAccountServiceParamsDTO,
+  ): Promise<BalanceAccountServiceResponseDTO> {
+    return this.balanceAccountService.execute(params);
   }
 }

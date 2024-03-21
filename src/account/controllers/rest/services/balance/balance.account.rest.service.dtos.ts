@@ -1,10 +1,9 @@
 import { AccountData } from '../../../../domain/entity/account.entity.data';
 
-export type WithdrawAccountRestServiceParamsDTO = {
+export type BalanceAccountRestServiceParamsDTO = {
   nickname: string;
-  value: number;
 };
 
-export type WithdrawAccountRestServiceResponseDTO = {
+export type BalanceAccountRestServiceResponseDTO = {
   account: AccountData;
 };

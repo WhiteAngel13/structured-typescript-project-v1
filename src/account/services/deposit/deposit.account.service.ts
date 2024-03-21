@@ -14,7 +14,7 @@ export class DepositAccountService {
     const account = params.toAccount;
     account.addBalance(params.data.value);
 
-    await this.accountRepository.updateBalance(account); // Aqui eu atualizo uma conta que já existe criando uma com o mesmo ID, deve ter um jeito melhor de fazer isso
+    await this.accountRepository.updateBalance(account);
 
     return { account };
   }

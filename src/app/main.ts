@@ -42,6 +42,19 @@ app.get('/bank/:operation', async (request, response) => {
         }
       }
       break;
+
+    case 'balance':
+      try {
+        const { account } = await accountRestController.balance(request.query);
+
+        response.end(`Your balance is ${account.balance}.`);
+      } catch (e) {
+        if (e instanceof Error) {
+          response.end(e.message);
+        }
+      }
+      break;
+
     default:
       response.end('Invalid operation');
       break;

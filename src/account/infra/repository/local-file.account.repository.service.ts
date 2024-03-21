@@ -84,5 +84,3 @@ export class AccountRepositoryService implements AccountRepository {
     await saveJsonFile(loadedJson);
   }
 }
-
-// Não entendi o motivo de ter service no nome do arquivo

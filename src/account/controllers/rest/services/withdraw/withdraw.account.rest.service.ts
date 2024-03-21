@@ -11,16 +11,19 @@ export class WithdrawAccountRestService {
   constructor(private readonly accountService: AccountService) {}
 
   async execute(params: Params): Promise<Response> {
-    const numberWithdrawValue = Number(params.withdrawValue);
-    if (isNaN(numberWithdrawValue)) throw new Error('invalid value');
-    if (numberWithdrawValue <= 0) throw new Error('invalid value');
+    const { account: accountExists } = await this.accountService.get({
+      by: { nickname: params.nickname },
+    });
+
+    if (!accountExists) throw new Error('account not found');
+    if (accountExists.balance < params.value)
+      throw new Error('not enough balance'); // não tenho certeza se esse é o melhor lugar para fazer essa validação
 
     const account = this.accountService.withdraw({
-      data: {
-        nickname: params.nickname,
-        withdrawValue: numberWithdrawValue,
-      },
+      toAccount: accountExists,
+      data: { value: params.value },
     });
+
     return account;
   }
 }
