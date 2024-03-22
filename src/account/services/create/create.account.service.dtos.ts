@@ -1,11 +1,11 @@
 import { Account } from '../../domain/entity/account.entity';
 
 export type CreateAccountServiceParamsDataDTO = {
-  nickname: string; // Aqui vão todos os dados fornecidos pelo usuário?
+  nickname: string;
 };
 
 export type CreateAccountServiceParamsDTO = {
-  data: CreateAccountServiceParamsDataDTO; // Não entendi direito a necessidade dessa estrutura
+  data: CreateAccountServiceParamsDataDTO;
 };
 
 export type CreateAccountServiceResponseDTO = {
