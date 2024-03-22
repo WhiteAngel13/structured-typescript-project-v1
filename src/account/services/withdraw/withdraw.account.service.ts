@@ -15,7 +15,7 @@ export class WithdrawAccountService {
     const currentBalance = params.toAccount.balance;
 
     if (withdrawValue <= 0) throw new Error('invalid value');
-    if (withdrawValue < currentBalance) throw new Error('not enough balance');
+    if (withdrawValue > currentBalance) throw new Error('not enough balance');
 
     const account = params.toAccount;
     account.removeBalance(params.data.value);
