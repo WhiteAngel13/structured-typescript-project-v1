@@ -16,8 +16,6 @@ export class WithdrawAccountRestService {
     });
 
     if (!accountExists) throw new Error('account not found');
-    if (accountExists.balance < params.value)
-      throw new Error('not enough balance'); // não tenho certeza se esse é o melhor lugar para fazer essa validação
 
     const account = this.accountService.withdraw({
       toAccount: accountExists,
