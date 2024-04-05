@@ -20,3 +20,5 @@ export class GetAccountService {
     return { account };
   }
 }
+
+// Acho que eu não estou usando o get...

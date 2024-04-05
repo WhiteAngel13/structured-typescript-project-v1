@@ -1,4 +1,7 @@
-import { BalanceAccountRestServiceResponseDTO } from './services/balance/balance.account.rest.service.dtos';
+import {
+  BalanceAccountRestServiceParamsDTOSchema,
+  BalanceAccountRestServiceResponseDTO,
+} from './services/balance/balance.account.rest.service.dtos';
 import { CreateAccountRestService } from './services/create/create.account.rest.service';
 import {
   CreateAccountRestServiceParamsDTOSchema,
@@ -12,6 +15,7 @@ import {
 import { WithdrawAccountRestService } from './services/withdraw/withdraw.account.rest.service';
 import { WithdrawAccountRestServiceResponseDTO } from './services/withdraw/withdraw.account.rest.service.dtos';
 import { BalanceAccountRestService } from './services/balance/balance.account.rest.service';
+import { WithdrawAccountRestServiceParamsDTOSchema } from './services/withdraw/withdraw.account.rest.service.dtos';
 
 export class AccountRestController {
   constructor(
@@ -35,33 +39,14 @@ export class AccountRestController {
   async withdraw(
     params: unknown,
   ): Promise<WithdrawAccountRestServiceResponseDTO> {
-    if (typeof params !== 'object') throw new Error('invalid params');
-    if (params === null) throw new Error('invalid params');
-    if (Array.isArray(params)) throw new Error('invalid params');
-    const { nickname } = params as { nickname?: unknown };
-    if (typeof nickname !== 'string') throw new Error('invalid nickname');
-    const { value } = params as { value?: unknown };
-    if (typeof value !== 'string') throw new Error('invalid value');
-    const valueNumber = Number(value);
-    if (isNaN(valueNumber)) throw new Error('invalid value');
-
-    return this.withdrawAccountRestService.execute({
-      nickname,
-      value: valueNumber,
-    });
+    const paramsDTO = WithdrawAccountRestServiceParamsDTOSchema.parse(params);
+    return this.withdrawAccountRestService.execute(paramsDTO);
   }
 
   async balance(
     params: unknown,
   ): Promise<BalanceAccountRestServiceResponseDTO> {
-    if (typeof params !== 'object') throw new Error('invalid params');
-    if (params === null) throw new Error('invalid params');
-    if (Array.isArray(params)) throw new Error('invalid params');
-    const { nickname } = params as { nickname?: unknown };
-    if (typeof nickname !== 'string') throw new Error('invalid nickname');
-
-    return this.balanceAccountRestService.execute({
-      nickname,
-    });
+    const paramsDTO = BalanceAccountRestServiceParamsDTOSchema.parse(params);
+    return this.balanceAccountRestService.execute(paramsDTO);
   }
 }
