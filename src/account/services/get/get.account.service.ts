@@ -1,17 +1,21 @@
-import { AccountRepository } from '../../domain/repository/account.repository';
+import { Injectable } from '@nestjs/common';
 import {
   GetAccountServiceParamsDTO,
   GetAccountServiceResponseDTO,
 } from './get.account.service.dtos';
+import { AccountRepositoryService } from '../../infra';
 
 type Params = GetAccountServiceParamsDTO;
 type Response = GetAccountServiceResponseDTO;
 
+@Injectable()
 export class GetAccountService {
-  constructor(private readonly accountRepository: AccountRepository) {}
+  constructor(
+    private readonly accountRepositoryService: AccountRepositoryService,
+  ) {}
 
   async execute(params: Params): Promise<Response> {
-    const { account } = await this.accountRepository.findUnique({
+    const { account } = await this.accountRepositoryService.findUnique({
       where: params.by,
     });
 

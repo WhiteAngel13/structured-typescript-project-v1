@@ -1,14 +1,16 @@
-import { AccountRepository } from '../../domain/repository/account.repository';
+import { Injectable } from '@nestjs/common';
 import {
   WithdrawAccountServiceParamsDTO,
   WithdrawAccountServiceResponseDTO,
 } from './withdraw.account.service.dtos';
+import { AccountRepositoryService } from '../../infra';
 
 type Params = WithdrawAccountServiceParamsDTO;
 type Response = WithdrawAccountServiceResponseDTO;
 
+@Injectable()
 export class WithdrawAccountService {
-  constructor(private accountRepository: AccountRepository) {}
+  constructor(private accountRepositoryService: AccountRepositoryService) {}
 
   async execute(params: Params): Promise<Response> {
     const withdrawValue = params.data.value;
@@ -20,7 +22,7 @@ export class WithdrawAccountService {
     const account = params.toAccount;
     account.removeBalance(params.data.value);
 
-    await this.accountRepository.updateBalance(account);
+    await this.accountRepositoryService.updateBalance(account);
 
     return { account };
   }

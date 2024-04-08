@@ -1,19 +1,22 @@
+import { Injectable } from '@nestjs/common';
 import { Account } from '../../domain/entity/account.entity';
-import { AccountRepository } from '../../domain/repository/account.repository';
 import { CreateAccountServiceParamsDTO } from './create.account.service.dtos';
 import { CreateAccountServiceResponseDTO } from './create.account.service.dtos';
 import { randomUUID } from 'crypto';
+import { AccountRepositoryService } from '../../infra/repository/local-file.account.repository.service';
 
 type Params = CreateAccountServiceParamsDTO;
 type Response = CreateAccountServiceResponseDTO;
 
+@Injectable()
 export class CreateAccountService {
-  constructor(private accountRepository: AccountRepository) {}
+  constructor(private accountRepositoryService: AccountRepositoryService) {}
 
   async execute(params: Params): Promise<Response> {
-    const accountWithNicknameExists = await this.accountRepository.findUnique({
-      where: { nickname: params.data.nickname },
-    });
+    const accountWithNicknameExists =
+      await this.accountRepositoryService.findUnique({
+        where: { nickname: params.data.nickname },
+      });
 
     if (accountWithNicknameExists.account)
       throw new Error('Account with nickname already exists');
@@ -25,7 +28,7 @@ export class CreateAccountService {
       nickname: params.data.nickname,
     });
 
-    await this.accountRepository.create(account);
+    await this.accountRepositoryService.create(account);
 
     return { account };
   }
